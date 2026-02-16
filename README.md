@@ -74,7 +74,7 @@ Supports three distinct assessment types:
    npm start
    ```
 
-4. **Access the Application**: Open your browser and navigate to `http://localhost:3000`
+4. **Access the Application**: https://baggy-salon-23274729.figma.site
 
 ## Contribution
 We welcome contributions. Please ensure to follow our code of conduct and submit a pull request.
