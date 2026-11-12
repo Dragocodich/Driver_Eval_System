@@ -1,9 +1,10 @@
 import { motion } from 'motion/react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { LogOut, User as UserIcon } from 'lucide-react';
+import { LogOut, User as UserIcon, LayoutDashboard } from 'lucide-react';
 import { PageType } from '../App';
 import { AuthUser } from '../lib/auth-service';
+import { BrandMark } from './BrandMark';
 
 interface HeaderProps {
   currentPage: PageType;
@@ -52,30 +53,24 @@ export function Header({ currentPage, onPageChange, isLoggedIn, user }: HeaderPr
 
   return (
     <motion.header
-      className="bg-white/10 backdrop-blur-md border-b border-white/20 sticky top-0 z-40"
+      className="sticky top-0 z-40 border-b border-white/10 bg-[#07162d]/85 shadow-[0_8px_30px_rgba(2,8,23,0.18)] backdrop-blur-xl"
       variants={headerVariants}
       initial="hidden"
       animate="visible"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex h-[72px] items-center justify-between">
           {/* Left side - Logo and Navigation */}
-          <motion.div className="flex items-center space-x-6" variants={itemVariants}>
+          <motion.div className="flex min-w-0 items-center gap-3 sm:gap-6" variants={itemVariants}>
             <motion.div 
-              className="flex items-center space-x-3"
+              className="flex min-w-0 items-center space-x-3"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              <motion.div 
-                className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-lg border border-white/30"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
-              >
-                <span className="text-white text-lg">📋</span>
-              </motion.div>
+              <BrandMark className="h-10 w-10 shrink-0 rounded-xl ring-1 ring-white/20" iconClassName="h-5 w-5" />
               <div>
-                <h1 className="text-xl text-white">TRISTAR</h1>
-                <p className="text-xs text-white/80">Driver Assessment System</p>
+                <h1 className="text-base font-bold tracking-[0.18em] text-white sm:text-lg">TRISTAR</h1>
+                <p className="hidden text-[11px] text-slate-300 sm:block">Driver Assessment System</p>
               </div>
             </motion.div>
 
@@ -87,8 +82,9 @@ export function Header({ currentPage, onPageChange, isLoggedIn, user }: HeaderPr
             >
               <Badge 
                 variant="outline" 
-                className="bg-white/20 backdrop-blur-sm text-white border-white/30 px-3 py-1 text-sm"
+                className="hidden border-white/10 bg-white/[0.07] px-3 py-1.5 text-xs font-medium text-slate-200 sm:flex"
               >
+                <LayoutDashboard className="mr-1.5 h-3.5 w-3.5 text-cyan-300" />
                 {getPageTitle()}
               </Badge>
             </motion.div>
@@ -99,20 +95,20 @@ export function Header({ currentPage, onPageChange, isLoggedIn, user }: HeaderPr
             <motion.div className="flex items-center space-x-4" variants={itemVariants}>
               {/* User Info */}
               <motion.div 
-                className="hidden sm:flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/20"
+                className="hidden items-center space-x-3 rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2 sm:flex"
                 whileHover={{ scale: 1.02, backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
                 transition={{ duration: 0.2 }}
               >
                 <motion.div 
-                  className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/20"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <UserIcon className="w-4 h-4 text-white" />
+                  <UserIcon className="h-4 w-4 text-blue-200" />
                 </motion.div>
                 <div className="text-white">
-                  <div className="text-sm">{user?.email || 'User'}</div>
-                  <div className="text-xs text-white/70">
+                  <div className="max-w-40 truncate text-xs font-medium">{user?.email || 'User'}</div>
+                  <div className="text-[10px] text-slate-400">
                     Administrator
                   </div>
                 </div>
@@ -127,7 +123,7 @@ export function Header({ currentPage, onPageChange, isLoggedIn, user }: HeaderPr
                   onClick={() => onPageChange('login')}
                   variant="outline"
                   size="sm"
-                  className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white shadow-lg"
+                  className="h-9 rounded-xl border-white/15 bg-white/[0.06] text-white shadow-none hover:bg-white/10 hover:text-white"
                 >
                   <LogOut className="w-4 h-4 mr-2" />
                   <span className="hidden sm:inline">Logout</span>
@@ -138,13 +134,7 @@ export function Header({ currentPage, onPageChange, isLoggedIn, user }: HeaderPr
         </div>
       </div>
 
-      {/* Animated underline */}
-      <motion.div
-        className="h-0.5 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      />
+      <div className="h-px bg-gradient-to-r from-transparent via-cyan-300/30 to-transparent" />
     </motion.header>
   );
 }

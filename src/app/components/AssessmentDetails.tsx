@@ -197,44 +197,44 @@ export function AssessmentDetails({ assessmentType, onBackToDashboard }: Assessm
   return (
     <>
       <motion.div 
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6"
+        className="mx-auto max-w-7xl space-y-6 px-4 py-7 sm:px-6 lg:px-8 lg:py-10"
         variants={containerVariants}
         initial="initial"
         animate="animate"
       >
         {/* Header with Navigation */}
         <motion.div 
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-4 sm:space-y-0"
+          className="flex flex-col items-start justify-between gap-5 lg:flex-row lg:items-center"
           variants={itemVariants}
         >
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-3">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={onBackToDashboard}
-                className="bg-white/90 backdrop-blur-sm border-white/20 hover:bg-white text-gray-700 shadow-lg"
+                className="rounded-xl border-white/20 bg-white/95 text-slate-700 shadow-lg hover:bg-white"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Dashboard
               </Button>
             </motion.div>
             <motion.div 
-              className="bg-gray-800/90 backdrop-blur-sm text-white px-6 py-2 rounded-lg shadow-lg"
+              className="rounded-2xl border border-white/10 bg-white/[0.08] px-5 py-2.5 text-white shadow-lg backdrop-blur-sm"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              <h1 className="text-lg">{getAssessmentTitle()}</h1>
-              <p className="text-xs text-gray-300">
+              <h1 className="text-base font-semibold tracking-wide">{getAssessmentTitle()}</h1>
+              <p className="text-xs text-slate-300">
                 {driversData.length} {driversData.length === 1 ? 'record' : 'records'}
               </p>
             </motion.div>
           </div>
 
           {/* Search and Actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex w-full flex-wrap items-center gap-3 lg:w-auto">
             <motion.div 
-              className="relative"
+              className="relative min-w-[220px] flex-1 lg:w-64 lg:flex-none"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
@@ -243,7 +243,7 @@ export function AssessmentDetails({ assessmentType, onBackToDashboard }: Assessm
                 placeholder="Search drivers..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-white/90 backdrop-blur-sm border-white/20 focus:border-blue-500 shadow-lg"
+                className="h-10 rounded-xl border-white/20 bg-white/95 pl-10 shadow-lg focus:border-blue-500"
               />
             </motion.div>
 
@@ -256,7 +256,7 @@ export function AssessmentDetails({ assessmentType, onBackToDashboard }: Assessm
                     assessmentType === 'interview' 
                       ? 'bg-yellow-600 hover:bg-yellow-700' 
                       : 'bg-green-600 hover:bg-green-700'
-                  } text-white shadow-lg`}
+                  } rounded-xl text-white shadow-lg`}
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   New Test
@@ -268,7 +268,7 @@ export function AssessmentDetails({ assessmentType, onBackToDashboard }: Assessm
               <Button
                 variant="outline"
                 size="sm"
-                className="bg-white/90 backdrop-blur-sm border-white/20 hover:bg-white text-gray-700 shadow-lg"
+                className="rounded-xl border-white/20 bg-white/95 text-slate-700 shadow-lg hover:bg-white"
               >
                 <Filter className="w-4 h-4 mr-2" />
                 Filter
@@ -280,11 +280,11 @@ export function AssessmentDetails({ assessmentType, onBackToDashboard }: Assessm
         {/* Info message for non-supported assessments */}
         {!supportsForm && (
           <motion.div 
-            className="bg-blue-50/90 backdrop-blur-sm border border-blue-200 rounded-lg p-4"
+            className="rounded-2xl border border-blue-200 bg-blue-50 p-4"
             variants={itemVariants}
           >
             <p className="text-blue-800 text-sm">
-              📋 Assessment forms are only available for IN-CAB and Interview assessments. This section displays existing {getAssessmentTitle()} data.
+              Assessment forms are only available for IN-CAB and Interview assessments. This section displays existing {getAssessmentTitle()} data.
             </p>
           </motion.div>
         )}
@@ -296,7 +296,7 @@ export function AssessmentDetails({ assessmentType, onBackToDashboard }: Assessm
 
         {/* Drivers Table */}
         <motion.div variants={itemVariants}>
-          <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-xl overflow-hidden">
+          <Card className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_14px_45px_rgba(2,8,23,0.12)]">
             <AnimatePresence>
               {isSorting && (
                 <motion.div
@@ -316,7 +316,7 @@ export function AssessmentDetails({ assessmentType, onBackToDashboard }: Assessm
 
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-blue-600/90 text-white">
+                <thead className="bg-slate-900 text-white">
                   <tr>
                     {[
                       { key: 'licenseNumber', label: 'License/ID' },
@@ -328,7 +328,7 @@ export function AssessmentDetails({ assessmentType, onBackToDashboard }: Assessm
                     ].map((column) => (
                       <th 
                         key={column.key}
-                        className="px-6 py-4 text-left cursor-pointer hover:bg-blue-700/50 transition-colors"
+                        className="cursor-pointer px-6 py-4 text-left text-xs font-semibold uppercase tracking-[0.08em] text-slate-200 transition-colors hover:bg-white/10"
                         onClick={() => handleSort(column.key as keyof DriverRecord)}
                       >
                         <motion.div 
@@ -449,7 +449,7 @@ export function AssessmentDetails({ assessmentType, onBackToDashboard }: Assessm
                           )}
                           {!supportsForm && (
                             <p className="text-xs text-blue-600 mt-2">
-                              💡 Create records by using the IN-CAB or Interview assessment forms
+                              Create records by using the IN-CAB or Interview assessment forms.
                             </p>
                           )}
                         </div>

@@ -1,5 +1,5 @@
 import { Button } from './ui/button';
-import { RefreshCw, Calendar, MapPin, User, FileText, Award, TrendingUp } from 'lucide-react';
+import { RefreshCw, Calendar, MapPin, User, FileText, Award, TrendingUp, Database } from 'lucide-react';
 import { DriverRecord, AssessmentData } from '../lib/database-service';
 
 interface DriverDetailsProps {
@@ -9,6 +9,13 @@ interface DriverDetailsProps {
 }
 
 export function DriverDetails({ driver, onReassessment, onClose }: DriverDetailsProps) {
+  const formatDate = (value?: string): string => {
+    if (!value) return 'N/A';
+
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? 'N/A' : date.toLocaleDateString();
+  };
+
   const getColorForStatus = (status?: string): string => {
     if (!status) return '#6B7280';
     
@@ -102,7 +109,7 @@ export function DriverDetails({ driver, onReassessment, onClose }: DriverDetails
   const driverScore = driver.overallScore || 0;
 
   return (
-    <div className="bg-gradient-to-r from-blue-50/80 to-cyan-50/80 backdrop-blur-sm p-6 border-t border-blue-200/50">
+    <div className="border-t border-slate-200 bg-slate-50/80 p-4 sm:p-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Driver Information */}
         <div className="space-y-4">
@@ -402,12 +409,15 @@ export function DriverDetails({ driver, onReassessment, onClose }: DriverDetails
           <div>
             <span className="text-gray-600">Last Updated:</span>
             <span className="ml-2 text-gray-800">
-              {driver.updatedAt ? new Date(driver.updatedAt.toDate()).toLocaleDateString() : 'N/A'}
+              {formatDate(driver.updatedAt)}
             </span>
           </div>
           <div className="flex items-center space-x-2 mb-4">
             <span className="text-gray-600">Data Source:</span>
-            <span className="ml-2 text-green-600">💾 Local Storage</span>
+            <span className="ml-2 inline-flex items-center gap-1.5 font-medium text-emerald-700">
+              <Database className="h-3.5 w-3.5" />
+              Local Storage
+            </span>
           </div>
         </div>
       </div>

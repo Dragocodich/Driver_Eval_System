@@ -371,7 +371,7 @@ export function Dashboard({ onAssessmentClick }: DashboardProps) {
 
   return (
     <motion.div 
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8"
+      className="mx-auto max-w-7xl space-y-7 px-4 py-7 sm:px-6 lg:px-8 lg:py-10"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -379,7 +379,7 @@ export function Dashboard({ onAssessmentClick }: DashboardProps) {
       {/* Error Banner */}
       {error && (
         <motion.div 
-          className="bg-yellow-50/90 backdrop-blur-sm border border-yellow-200 rounded-lg p-4"
+          className="rounded-2xl border border-amber-200 bg-amber-50 p-4 shadow-sm"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
@@ -387,15 +387,27 @@ export function Dashboard({ onAssessmentClick }: DashboardProps) {
           <div className="flex items-center space-x-2">
             <AlertCircle className="w-5 h-5 text-yellow-600" />
             <p className="text-yellow-800 text-sm">
-              🔄 Running in offline mode. Some data may not be current.
+              Running in offline mode. Some data may not be current.
             </p>
           </div>
         </motion.div>
       )}
 
+      <motion.div variants={headerVariants} className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+        <div>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">Operations overview</p>
+          <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">Driver performance dashboard</h1>
+          <p className="mt-2 max-w-2xl text-sm text-slate-300">A live view of assessments, outcomes, and capability trends across your workforce.</p>
+        </div>
+        <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-2 text-xs text-slate-300">
+          <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(52,211,153,0.12)]" />
+          Local data synced
+        </div>
+      </motion.div>
+
       {/* Header Stats */}
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
+        className="grid grid-cols-1 gap-4 md:grid-cols-3"
         variants={containerVariants}
       >
         {[
@@ -422,12 +434,11 @@ export function Dashboard({ onAssessmentClick }: DashboardProps) {
             key={index}
             variants={statsVariants}
             whileHover={{ 
-              scale: 1.05,
-              y: -5,
+              y: -3,
               transition: { duration: 0.2 }
             }}
           >
-            <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-lg p-6 relative overflow-hidden">
+            <Card className="relative overflow-hidden rounded-2xl border border-white/80 bg-white p-6 shadow-[0_12px_40px_rgba(2,8,23,0.12)]">
               <motion.div
                 className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${stat.color} opacity-10 rounded-full -mr-6 -mt-6`}
                 animate={{ 
@@ -442,13 +453,13 @@ export function Dashboard({ onAssessmentClick }: DashboardProps) {
               />
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">{stat.title}</p>
-                  <p className="text-2xl text-gray-800">{stat.value}</p>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{stat.title}</p>
+                  <p className="text-3xl font-semibold tracking-tight text-slate-950">{stat.value}</p>
                 </div>
                 <motion.div
-                  className={`p-3 rounded-lg bg-gradient-to-br ${stat.color} shadow-lg`}
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
+                  className={`rounded-xl bg-gradient-to-br p-3 ${stat.color} shadow-lg`}
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <stat.icon className="w-6 h-6 text-white" />
                 </motion.div>
@@ -460,40 +471,41 @@ export function Dashboard({ onAssessmentClick }: DashboardProps) {
 
       {/* KPI Comparison Charts */}
       <motion.div variants={cardVariants}>
-        <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-xl p-8 relative overflow-hidden">
+        <Card className="relative overflow-hidden rounded-3xl border border-white/80 bg-white p-5 shadow-[0_18px_55px_rgba(2,8,23,0.14)] sm:p-8">
           {/* Background decoration */}
           <motion.div
-            className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
+            className="absolute left-0 top-0 h-1.5 w-full bg-gradient-to-r from-red-500 via-yellow-400 to-green-500"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
           />
           
-          <motion.div className="mb-6 text-center" variants={headerVariants}>
+          <motion.div className="mb-8 flex flex-col justify-between gap-4 text-left sm:flex-row sm:items-end" variants={headerVariants}>
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-blue-600">Capability mix</p>
             <motion.h2 
-              className="text-2xl text-gray-800 mb-2"
+              className="mb-2 text-2xl font-semibold tracking-tight text-slate-950"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
               KPI Performance Comparison
             </motion.h2>
-            <p className="text-gray-600">
-              <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-1"></span>
-              Skill • 
-              <span className="inline-block w-3 h-3 bg-yellow-500 rounded-full mx-1"></span>
-              Knowledge • 
-              <span className="inline-block w-3 h-3 bg-red-500 rounded-full mx-1"></span>
-              Awareness across different assessments
-            </p>
+            <p className="text-sm text-slate-500">Compare KPI composition across assessment types and locations.</p>
+            </div>
+            <div className="flex flex-wrap gap-2 text-xs font-medium text-slate-600">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-green-50 px-3 py-1.5"><span className="h-2 w-2 rounded-full bg-green-600" />Skill</span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-yellow-50 px-3 py-1.5"><span className="h-2 w-2 rounded-full bg-yellow-500" />Knowledge</span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-red-50 px-3 py-1.5"><span className="h-2 w-2 rounded-full bg-red-600" />Awareness</span>
+            </div>
             {error && (
               <p className="text-xs text-yellow-600 mt-1">
-                ⚠️ Data may not be current due to connection issues
+                Data may not be current due to connection issues
               </p>
             )}
           </motion.div>
           
           <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 justify-items-center"
+            className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-5"
             variants={chartContainerVariants}
           >
             {getAssessmentData().map((assessment, index) => (
@@ -501,8 +513,7 @@ export function Dashboard({ onAssessmentClick }: DashboardProps) {
                 key={index}
                 variants={cardVariants}
                 whileHover={{ 
-                  scale: 1.05,
-                  y: -5,
+                  y: -3,
                   transition: { duration: 0.3 }
                 }}
               >
@@ -519,23 +530,23 @@ export function Dashboard({ onAssessmentClick }: DashboardProps) {
           
           {/* Summary Stats */}
           <motion.div 
-            className="mt-8 pt-6 border-t border-gray-200"
+            className="mt-8 border-t border-slate-100 pt-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.5 }}
           >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                <div className="text-2xl text-green-700 mb-1">{stats?.averageScores.skill || 0}%</div>
-                <div className="text-sm text-green-600">Average Skill Score</div>
+              <div className="rounded-2xl border border-green-100 bg-green-50/70 p-4">
+                <div className="mb-1 text-2xl font-semibold text-green-700">{stats?.averageScores.skill || 0}%</div>
+                <div className="text-xs font-medium uppercase tracking-wide text-green-700">Average Skill</div>
               </div>
-              <div className="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-                <div className="text-2xl text-yellow-700 mb-1">{stats?.averageScores.knowledge || 0}%</div>
-                <div className="text-sm text-yellow-600">Average Knowledge Score</div>
+              <div className="rounded-2xl border border-yellow-100 bg-yellow-50/70 p-4">
+                <div className="mb-1 text-2xl font-semibold text-yellow-700">{stats?.averageScores.knowledge || 0}%</div>
+                <div className="text-xs font-medium uppercase tracking-wide text-yellow-700">Average Knowledge</div>
               </div>
-              <div className="p-4 bg-red-50 rounded-lg border border-red-200">
-                <div className="text-2xl text-red-700 mb-1">{stats?.averageScores.awareness || 0}%</div>
-                <div className="text-sm text-red-600">Average Awareness Score</div>
+              <div className="rounded-2xl border border-red-100 bg-red-50/70 p-4">
+                <div className="mb-1 text-2xl font-semibold text-red-700">{stats?.averageScores.awareness || 0}%</div>
+                <div className="text-xs font-medium uppercase tracking-wide text-red-700">Average Awareness</div>
               </div>
             </div>
           </motion.div>

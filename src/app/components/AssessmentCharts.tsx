@@ -156,7 +156,7 @@ export function AssessmentCharts({ assessmentType }: AssessmentChartsProps) {
     return (
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         {[1, 2, 3].map((i) => (
-          <Card key={i} className="bg-white/95 backdrop-blur-sm border-0 shadow-lg p-6">
+          <Card key={i} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="animate-pulse">
               <div className="h-4 bg-gray-200 rounded mb-4"></div>
               <div className="h-48 bg-gray-200 rounded"></div>
@@ -182,8 +182,9 @@ export function AssessmentCharts({ assessmentType }: AssessmentChartsProps) {
     >
       {/* Result Distribution Chart */}
       <motion.div variants={cardVariants}>
-        <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-lg p-6">
-          <h3 className="text-lg text-gray-800 mb-4">Result Distribution</h3>
+        <Card className="h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_10px_35px_rgba(15,23,42,0.08)]">
+          <h3 className="mb-1 text-base font-semibold text-slate-900">Result Distribution</h3>
+          <p className="mb-4 text-xs text-slate-500">Assessment outcomes by status</p>
           <div className="h-48 w-full">
             <ResponsiveContainer width="100%" height={192}>
               <PieChart>
@@ -218,8 +219,9 @@ export function AssessmentCharts({ assessmentType }: AssessmentChartsProps) {
 
       {/* Monthly Test Trends */}
       <motion.div variants={cardVariants}>
-        <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-lg p-6">
-          <h3 className="text-lg text-gray-800 mb-4">Monthly Test Trends</h3>
+        <Card className="h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_10px_35px_rgba(15,23,42,0.08)]">
+          <h3 className="mb-1 text-base font-semibold text-slate-900">Monthly Test Trends</h3>
+          <p className="mb-4 text-xs text-slate-500">Volume throughout the current year</p>
           <div className="h-48 w-full">
             <ResponsiveContainer width="100%" height={192}>
               <BarChart data={getMonthlyTestData()}>
@@ -253,8 +255,9 @@ export function AssessmentCharts({ assessmentType }: AssessmentChartsProps) {
 
       {/* Location Distribution */}
       <motion.div variants={cardVariants}>
-        <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-lg p-6">
-          <h3 className="text-lg text-gray-800 mb-4">Location Distribution</h3>
+        <Card className="h-full rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_10px_35px_rgba(15,23,42,0.08)]">
+          <h3 className="mb-1 text-base font-semibold text-slate-900">Location Distribution</h3>
+          <p className="mb-4 text-xs text-slate-500">Performance across operating locations</p>
           <div className="h-48 w-full">
             <ResponsiveContainer width="100%" height={192}>
               <BarChart data={getCompanyDistributionData()} layout="horizontal">

@@ -146,7 +146,7 @@ export function MultiSegmentDonut({
 
   return (
     <motion.div 
-      className="flex flex-col items-center space-y-4"
+      className="flex flex-col items-center space-y-4 rounded-2xl px-2 py-3"
       variants={containerVariants}
       initial="initial"
       animate="animate"
@@ -217,7 +217,7 @@ export function MultiSegmentDonut({
           variants={centerTextVariants}
         >
           <motion.div 
-            className="text-sm text-gray-800 leading-tight"
+            className="text-xs font-bold leading-tight tracking-wide text-slate-800"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
@@ -225,7 +225,7 @@ export function MultiSegmentDonut({
           </motion.div>
           {subtitle && (
             <motion.div 
-              className="text-xs text-gray-600 mt-1 max-w-[90px] leading-tight"
+              className="mt-1 max-w-[90px] text-[10px] font-medium uppercase leading-tight tracking-wide text-slate-500"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.3 }}
@@ -237,7 +237,7 @@ export function MultiSegmentDonut({
       </motion.div>
       
       {/* Legend with percentages */}
-      <motion.div className="flex flex-col space-y-1 text-xs">
+      <motion.div className="flex flex-col space-y-1.5 text-xs">
         {[
           { name: 'Skill', value: Math.round(skillPercent), color: skillColor, key: 'skill' },
           { name: 'Knowledge', value: Math.round(knowledgePercent), color: knowledgeColor, key: 'knowledge' },
@@ -245,7 +245,7 @@ export function MultiSegmentDonut({
         ].map((item) => (
           <motion.div 
             key={item.key}
-            className="flex items-center space-x-2 cursor-pointer"
+            className="flex cursor-pointer items-center space-x-2 rounded-md px-2 py-0.5"
             variants={legendVariants}
             whileHover="hover"
             {...getHoverProps(item.key)}
@@ -256,7 +256,7 @@ export function MultiSegmentDonut({
               whileHover={{ scale: 1.2 }}
               transition={{ duration: 0.2 }}
             />
-            <span className="text-gray-700 text-xs">{item.name}: {item.value}%</span>
+            <span className="text-xs font-medium text-slate-600">{item.name}: {item.value}%</span>
           </motion.div>
         ))}
       </motion.div>

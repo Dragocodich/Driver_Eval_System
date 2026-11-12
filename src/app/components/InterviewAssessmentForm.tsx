@@ -406,26 +406,26 @@ export function InterviewAssessmentForm({ onClose, initialData, isEdit = false }
 
   return (
     <motion.div
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center p-4 overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-950/70 p-2 backdrop-blur-sm sm:p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
       <motion.div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-6xl my-8"
+        className="my-3 w-full max-w-6xl rounded-2xl bg-white shadow-2xl sm:my-8"
         initial={{ scale: 0.95, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.95, y: 20 }}
         transition={{ duration: 0.2 }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-t-2xl">
+        <div className="flex flex-col items-start justify-between gap-4 rounded-t-2xl border-b border-slate-200 bg-gradient-to-r from-yellow-50 to-amber-50 p-4 sm:flex-row sm:items-center sm:p-6">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg">
               <FileText className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">TRISTAR INTERVIEW ASSESSMENT</h2>
+              <h2 className="text-lg font-bold text-gray-900 sm:text-2xl">TRISTAR INTERVIEW ASSESSMENT</h2>
               <p className="text-sm text-gray-600">Driver Recruitment Evaluation Form</p>
             </div>
           </div>
@@ -451,14 +451,14 @@ export function InterviewAssessmentForm({ onClose, initialData, isEdit = false }
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-8 max-h-[80vh] overflow-y-auto">
+        <form onSubmit={handleSubmit} className="max-h-[80vh] space-y-8 overflow-y-auto p-4 sm:p-6">
           {/* 1. General Information */}
           <Card className="overflow-hidden shadow-sm">
             <div className="bg-gradient-to-r from-gray-100 to-gray-200 p-4 border-b">
               <h3 className="text-lg font-bold text-gray-900">1. General Information</h3>
             </div>
             <div className="p-6">
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <div>
                   <Label htmlFor="driverName">Driver Name *</Label>
                   <Input
@@ -734,7 +734,7 @@ export function InterviewAssessmentForm({ onClose, initialData, isEdit = false }
                   <Label className="text-base font-semibold text-gray-800 mb-3 block">
                     5. Tick the correct Emergency Numbers
                   </Label>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
                     {['Police 999', 'Ambulance 997', 'Civil Defence 997'].map((option) => (
                       <div key={option} className="flex items-center space-x-2 p-2 bg-white rounded border">
                         <Checkbox

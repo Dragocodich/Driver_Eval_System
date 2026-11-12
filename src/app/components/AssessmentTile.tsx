@@ -86,45 +86,48 @@ export function AssessmentTile({ title, subtitle, icon: Icon, onClick }: Assessm
       whileTap="tap"
     >
       <Card 
-        className="group cursor-pointer bg-gradient-to-br from-blue-500 to-blue-600 border-0 shadow-lg text-white p-8 h-48 flex flex-col items-center justify-center space-y-4 overflow-hidden relative"
+        className="group relative flex h-44 cursor-pointer flex-col items-start justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 text-slate-900 shadow-[0_10px_35px_rgba(15,23,42,0.08)]"
         onClick={onClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            onClick();
+          }
+        }}
       >
         {/* Background Animation */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-blue-600 to-blue-700 opacity-0 group-hover:opacity-100"
+          className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           variants={backgroundVariants}
           whileHover="hover"
         />
         
         {/* Ripple Effect */}
-        <motion.div
-          className="absolute inset-0 bg-white/10 rounded-full scale-0 group-hover:scale-150 opacity-0 group-hover:opacity-100"
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        />
-        
         {/* Content */}
-        <div className="relative z-10 flex flex-col items-center space-y-4">
+        <div className="relative z-10 flex h-full w-full flex-col items-start justify-between">
           <motion.div 
-            className="p-4 bg-white/20 rounded-full group-hover:bg-white/30 transition-all duration-300 shadow-lg"
+            className="rounded-xl bg-blue-50 p-3 text-blue-600 transition-all duration-300 group-hover:bg-white/15 group-hover:text-white"
             variants={iconVariants}
             whileHover="hover"
           >
-            <Icon className="w-8 h-8 text-white drop-shadow-md" />
+            <Icon className="h-6 w-6" />
           </motion.div>
           
           <motion.div 
-            className="text-center space-y-1"
+            className="space-y-1 text-left"
             variants={textVariants}
           >
             <motion.h3 
-              className="text-sm tracking-wider uppercase drop-shadow-md"
+              className="text-sm font-bold tracking-[0.14em] text-slate-900 transition-colors group-hover:text-white"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
               {title}
             </motion.h3>
             <motion.p 
-              className="text-xs opacity-90 drop-shadow-sm"
+              className="text-xs font-medium text-slate-500 transition-colors group-hover:text-blue-100"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
@@ -133,11 +136,7 @@ export function AssessmentTile({ title, subtitle, icon: Icon, onClick }: Assessm
           </motion.div>
         </div>
 
-        {/* Shine Effect */}
-        <motion.div
-          className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full"
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        />
+        <div className="absolute bottom-0 left-0 h-1 w-full origin-left scale-x-0 bg-cyan-300 transition-transform duration-300 group-hover:scale-x-100" />
       </Card>
     </motion.div>
   );

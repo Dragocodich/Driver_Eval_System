@@ -5,7 +5,6 @@ import { Header } from './components/Header';
 import { LoginPage } from './components/LoginPage';
 import { Dashboard } from './components/Dashboard';
 import { AssessmentDetails } from './components/AssessmentDetails';
-import { ImageWithFallback } from './components/figma/ImageWithFallback';
 import { AuthService, AuthUser } from './lib/auth-service';
 
 export type PageType = 'login' | 'dashboard' | 'assessment-details';
@@ -39,22 +38,20 @@ const pageVariants = {
 
 const backgroundVariants = {
   login: {
-    background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(16, 185, 129, 0.2) 50%, rgba(6, 182, 212, 0.3) 100%)'
+    background: 'linear-gradient(135deg, rgba(6, 18, 40, 0.08) 0%, rgba(10, 43, 76, 0.18) 100%)'
   },
   dashboard: {
-    background: 'linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(14, 116, 144, 0.2) 50%, rgba(15, 118, 110, 0.4) 100%)'
+    background: 'linear-gradient(135deg, rgba(8, 28, 58, 0.12) 0%, rgba(7, 54, 80, 0.2) 100%)'
   },
   'assessment-details': {
-    background: 'linear-gradient(135deg, rgba(17, 24, 39, 0.3) 0%, rgba(75, 85, 99, 0.2) 50%, rgba(107, 114, 128, 0.3) 100%)'
+    background: 'linear-gradient(135deg, rgba(6, 20, 43, 0.15) 0%, rgba(20, 50, 72, 0.2) 100%)'
   }
 };
 
 const floatingElements = [
-  { top: '5%', left: '5%', size: 'w-32 h-32', color: 'bg-white/10', blur: 'blur-xl' },
-  { bottom: '5%', right: '5%', size: 'w-48 h-48', color: 'bg-cyan-300/20', blur: 'blur-2xl' },
-  { top: '50%', left: '2%', size: 'w-24 h-24', color: 'bg-teal-400/15', blur: 'blur-lg' },
-  { top: '20%', right: '10%', size: 'w-16 h-16', color: 'bg-blue-400/20', blur: 'blur-md' },
-  { bottom: '30%', left: '8%', size: 'w-20 h-20', color: 'bg-emerald-300/15', blur: 'blur-lg' }
+  { top: '-8%', left: '-4%', size: 'w-80 h-80', color: 'bg-blue-500/15', blur: 'blur-3xl' },
+  { bottom: '-12%', right: '-6%', size: 'w-96 h-96', color: 'bg-cyan-400/10', blur: 'blur-3xl' },
+  { top: '38%', right: '18%', size: 'w-64 h-64', color: 'bg-sky-400/5', blur: 'blur-3xl' }
 ];
 
 export default function App() {
@@ -149,7 +146,7 @@ export default function App() {
   // Show loading spinner while checking auth state
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600">
+      <div className="min-h-screen flex items-center justify-center bg-[#07162d]">
         <motion.div
           className="w-16 h-16 border-4 border-white/30 border-t-white rounded-full"
           animate={{ rotate: 360 }}
@@ -160,15 +157,9 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Dynamic Sky and Ocean Background */}
-      <div className="fixed inset-0">
-        <ImageWithFallback
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-          alt="Sky and ocean background"
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <div className="min-h-screen relative overflow-hidden bg-[#07162d]">
+      <div className="fixed inset-0 bg-[linear-gradient(145deg,#07162d_0%,#0b2945_55%,#0b3650_100%)]" />
+      <div className="fixed inset-0 opacity-[0.035] [background-image:linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] [background-size:48px_48px]" />
       
       {/* Animated Background Overlay */}
       <motion.div 
@@ -177,7 +168,7 @@ export default function App() {
         variants={backgroundVariants}
         transition={{ duration: 0.8, ease: "easeInOut" }}
       />
-      <div className="fixed inset-0 bg-black/10"></div>
+      <div className="fixed inset-0 bg-gradient-to-b from-transparent via-transparent to-[#04101f]/30"></div>
       
       {/* Animated Floating Elements */}
       {floatingElements.map((element, index) => (
@@ -191,12 +182,11 @@ export default function App() {
             right: element.right
           }}
           animate={{
-            y: [0, -10, 0],
-            x: [0, 5, 0],
-            scale: [1, 1.05, 1]
+            y: [0, -14, 0],
+            scale: [1, 1.04, 1]
           }}
           transition={{
-            duration: 6 + index,
+            duration: 9 + index,
             repeat: Infinity,
             ease: "easeInOut",
             delay: index * 0.5

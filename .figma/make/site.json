@@ -1,0 +1,14 @@
+{
+  "title": "Driver Manager",
+  "description": "This application assesses users' knowledge of traffic signs through interactive multiple-choice questions, enhancing road safety awareness and driving skills.",
+  "robots": {
+    "index": false
+  },
+  "icons": {
+    "icon": "/.figma/make/favicon.png"
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
